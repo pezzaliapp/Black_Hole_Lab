@@ -1,0 +1,18 @@
+:root{
+  --bg:#070b18; --panel:#0e1a33; --ink:#eaf3ff; --muted:#9db3cc; --line:#1b2946; --cta:#2dd4bf;
+}
+*{box-sizing:border-box}
+html,body{height:100%; margin:0; font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial}
+body{display:flex; flex-direction:column; background:radial-gradient(1200px 600px at 50% -20%,#0c1530,var(--bg)); color:var(--ink)}
+header{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border-bottom:1px solid var(--line); background:#0a142acc; backdrop-filter:blur(6px)}
+header h1{margin:0; font-size:16px}
+.controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.controls label{display:flex; gap:6px; align-items:center; color:var(--muted)}
+.controls input[type="range"]{width:140px}
+button{background:var(--panel); border:1px solid #1c2a4b; color:var(--ink); padding:6px 10px; border-radius:6px; cursor:pointer}
+button:hover{opacity:.9}
+main{position:relative; flex:1}
+canvas{display:block; width:100%; height:100%}
+#hud{position:absolute; left:12px; top:12px; background:#00000033; padding:8px 10px; border-radius:8px; color:var(--muted); font-size:13px}
+#hud .hint{opacity:.75; margin-top:4px}
+footer{border-top:1px solid var(--line); color:var(--muted); padding:8px 12px; font-size:12px}
