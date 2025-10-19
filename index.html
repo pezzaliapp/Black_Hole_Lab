@@ -31,7 +31,7 @@
         <input id="disk" type="checkbox" checked>
       </label>
       <button id="resetCam" title="Reimposta camera">Reset cam</button>
-      <button id="infoBtn" title="Apri informazioni">📘 Info</button>
+      <button id="infoBtn" title="Informazioni / README">📘 Info</button>
       <button id="install" hidden>Installa</button>
     </div>
   </header>
@@ -45,7 +45,26 @@
     </div>
   </main>
 
-  <!-- Overlay README -->
+  <!-- Intro overlay (splash) -->
+  <div id="introOverlay" class="show" aria-hidden="false">
+    <div class="panel intro" role="dialog" aria-modal="true" aria-label="Intro Black Hole Lab">
+      <div class="panel-head">
+        <strong>Black Hole Lab — Info</strong>
+        <button id="introClose" class="ghost" title="Chiudi">✕</button>
+      </div>
+      <div class="intro-body">
+        <h2>🕳️ Black Hole Lab — WebGL Edition</h2>
+        <p>Un esperimento interattivo che simula il <b>lensing gravitazionale</b> attorno a un buco nero.<br>
+        Creato per esplorare la bellezza matematica del cosmo in tempo reale, direttamente dal browser.</p>
+        <button class="primary" id="introPlay">▶ Play</button>
+      </div>
+      <div class="panel-foot">
+        <small>© 2025 — pezzaliAPP.com · Cultura digitale tra codice e spazio</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay README (solo info, nessun Play) -->
   <div id="infoOverlay" aria-hidden="true">
     <div class="panel" role="dialog" aria-modal="true" aria-label="Informazioni e README">
       <div class="panel-head">
@@ -53,9 +72,6 @@
         <button id="infoClose" class="ghost" title="Chiudi">✕</button>
       </div>
       <iframe src="readme.html" title="README"></iframe>
-      <div class="panel-foot">
-        <button class="primary" id="playBtn">▶ Play</button>
-      </div>
     </div>
   </div>
 
@@ -64,12 +80,5 @@
   </footer>
 
   <script src="app.js"></script>
-  <script>
-    // Rendiamo il pulsante Play robusto: usa "./" e replace per evitare di aprire il manifest per errore
-    document.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('playBtn');
-      if(btn){ btn.addEventListener('click', () => { location.replace('./'); }); }
-    });
-  </script>
 </body>
 </html>

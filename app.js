@@ -1,21 +1,42 @@
-/* app.js — Black Hole Lab WebGL (PWA) — v1.2.1 (overlay Info)
+/* app.js — Black Hole Lab WebGL (PWA) — v1.3 (intro splash + info overlay)
    Autore: pezzaliAPP (prototipo) */
 (() => {
   const G = 6.67430e-11, C = 299792458, MSUN = 1.98847e30;
+
+  // DOM
   const canvas = document.getElementById('gl');
   const massEl = document.getElementById('mass'), massVal = document.getElementById('massVal');
   const qualityEl = document.getElementById('quality'), qualityVal = document.getElementById('qualityVal');
   const exposureEl = document.getElementById('exposure'), exposureVal = document.getElementById('exposureVal');
-  const diskEl = document.getElementById('disk'); const resetCamBtn = document.getElementById('resetCam');
-  const rsText = document.getElementById('rsText'); const fpsText = document.getElementById('fps'); const installBtn = document.getElementById('install');
-  const infoBtn = document.getElementById('infoBtn'); const infoClose = document.getElementById('infoClose'); const infoOv = document.getElementById('infoOverlay');
+  const diskEl = document.getElementById('disk');
+  const resetCamBtn = document.getElementById('resetCam');
+  const rsText = document.getElementById('rsText');
+  const fpsText = document.getElementById('fps');
+  const installBtn = document.getElementById('install');
+
+  // Overlays
+  const infoBtn = document.getElementById('infoBtn');
+  const infoClose = document.getElementById('infoClose');
+  const infoOv = document.getElementById('infoOverlay');
+  const introOv = document.getElementById('introOverlay');
+  const introClose = document.getElementById('introClose');
+  const introPlay = document.getElementById('introPlay');
+
   function openInfo(){ infoOv.classList.add('show'); infoOv.setAttribute('aria-hidden','false'); }
   function closeInfo(){ infoOv.classList.remove('show'); infoOv.setAttribute('aria-hidden','true'); }
+  function closeIntro(){ introOv.classList.remove('show'); introOv.setAttribute('aria-hidden','true'); }
+
+  // Show intro at start
+  introOv.classList.add('show');
+  introOv.setAttribute('aria-hidden','false');
+  introPlay.addEventListener('click', closeIntro);
+  introClose.addEventListener('click', closeIntro);
+  window.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ closeInfo(); closeIntro(); } });
   infoBtn.addEventListener('click', openInfo);
   if(infoClose) infoClose.addEventListener('click', closeInfo);
-  window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeInfo(); });
   if(infoOv) infoOv.addEventListener('click', (e)=>{ if(e.target===infoOv) closeInfo(); });
 
+  // WebGL
   const gl = canvas.getContext('webgl', { antialias:false, alpha:false, preserveDrawingBuffer:false });
   if(!gl){ alert('WebGL non disponibile'); return; }
 
@@ -43,6 +64,7 @@
   function program(vs,fs){const p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,vs));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);
     if(!gl.getProgramParameter(p,gl.LINK_STATUS)){console.error(gl.getProgramInfoLog(p));throw new Error('Program link error');}return p;}
   const prog=program(vert,frag);gl.useProgram(prog);
+
   const quad=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,quad);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
   const aPos=gl.getAttribLocation(prog,'aPos');gl.enableVertexAttribArray(aPos);gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
   const uRes=gl.getUniformLocation(prog,'uRes'),uTime=gl.getUniformLocation(prog,'uTime'),uMassKg=gl.getUniformLocation(prog,'uMassKg');
