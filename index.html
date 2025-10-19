@@ -54,8 +54,7 @@
       </div>
       <iframe src="readme.html" title="README"></iframe>
       <div class="panel-foot">
-        <button class="primary" onclick="location.href='index.html'">▶ Play</button>
-        <button class="ghost" onclick="location.href='https://www.pezzaliapp.com'">🏠 Home</button>
+        <button class="primary" id="playBtn">▶ Play</button>
       </div>
     </div>
   </div>
@@ -65,5 +64,12 @@
   </footer>
 
   <script src="app.js"></script>
+  <script>
+    // Rendiamo il pulsante Play robusto: usa "./" e replace per evitare di aprire il manifest per errore
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('playBtn');
+      if(btn){ btn.addEventListener('click', () => { location.replace('./'); }); }
+    });
+  </script>
 </body>
 </html>
