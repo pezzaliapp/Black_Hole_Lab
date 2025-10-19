@@ -1,5 +1,5 @@
 // sw.js — cache-first app shell (very small)
-const CACHE = 'bh-webgl-v1';
+const CACHE = 'bh-webgl-v1.2';
 const ASSETS = [
   './',
   './index.html',
@@ -7,7 +7,9 @@ const ASSETS = [
   './app.js',
   './manifest.webmanifest',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './README.md',
+  './readme.html'
 ];
 
 self.addEventListener('install', e=>{
@@ -19,7 +21,6 @@ self.addEventListener('activate', e=>{
 self.addEventListener('fetch', e=>{
   const url = new URL(e.request.url);
   if(e.request.method!=='GET') return;
-  // cache-first for same-origin
   if(url.origin === self.location.origin){
     e.respondWith(caches.match(e.request).then(r=> r || fetch(e.request).then(res=>{
       const copy = res.clone();

@@ -16,3 +16,40 @@ canvas{display:block; width:100%; height:100%}
 #hud{position:absolute; left:12px; top:12px; background:#00000033; padding:8px 10px; border-radius:8px; color:var(--muted); font-size:13px}
 #hud .hint{opacity:.75; margin-top:4px}
 footer{border-top:1px solid var(--line); color:var(--muted); padding:8px 12px; font-size:12px}
+
+/* ===== Overlay README ===== */
+#infoOverlay{
+  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.55); backdrop-filter: blur(6px);
+  z-index: 50; padding:16px;
+}
+#infoOverlay.show{ display:flex; animation: fadeIn .12s ease-out; }
+@keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+
+#infoOverlay .panel{
+  width:min(960px, 96vw); height:min(80vh, 880px);
+  background:#0c1530; color:var(--ink); border:1px solid var(--line);
+  border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.45);
+  display:flex; flex-direction:column; overflow:hidden;
+}
+#infoOverlay .panel-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 12px; background:#0a142a; border-bottom:1px solid var(--line);
+}
+#infoOverlay .panel-foot{
+  display:flex; gap:8px; justify-content:flex-end; align-items:center;
+  padding:10px 12px; background:#0a142a; border-top:1px solid var(--line);
+}
+#infoOverlay .panel iframe{
+  flex:1; width:100%; border:0; background:#060b18;
+}
+
+button.primary{
+  background:var(--cta); color:#001; font-weight:700; border:none; border-radius:8px;
+  padding:10px 16px; cursor:pointer;
+}
+button.ghost{
+  background:transparent; color:var(--ink); border:1px solid #1c2a4b; border-radius:8px;
+  padding:8px 12px; cursor:pointer;
+}
+button.primary:hover, button.ghost:hover{ opacity:.9 }

@@ -31,6 +31,7 @@
         <input id="disk" type="checkbox" checked>
       </label>
       <button id="resetCam" title="Reimposta camera">Reset cam</button>
+      <button id="infoBtn" title="Apri informazioni">📘 Info</button>
       <button id="install" hidden>Installa</button>
     </div>
   </header>
@@ -43,6 +44,21 @@
       <div class="hint">Trascina per ruotare · pinch/rotellina = zoom</div>
     </div>
   </main>
+
+  <!-- Overlay README -->
+  <div id="infoOverlay" aria-hidden="true">
+    <div class="panel" role="dialog" aria-modal="true" aria-label="Informazioni e README">
+      <div class="panel-head">
+        <strong>Black Hole Lab — Info</strong>
+        <button id="infoClose" class="ghost" title="Chiudi">✕</button>
+      </div>
+      <iframe src="readme.html" title="README"></iframe>
+      <div class="panel-foot">
+        <button class="primary" onclick="location.href='index.html'">▶ Play</button>
+        <button class="ghost" onclick="location.href='https://www.pezzaliapp.com'">🏠 Home</button>
+      </div>
+    </div>
+  </div>
 
   <footer>
     Lensing gravitazionale approssimato (Schwarzschild, deflessione α ≈ 4GM/(c²b)). Shader con starfield procedurale e disco di accrescimento stilizzato.
