@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Hole Lab — WebGL Edition</title>
+<style>
+:root{
+  --bg:#060b18; --text:#eaf3ff; --muted:#94a8c6; --accent:#2dd4bf;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:radial-gradient(1000px 600px at 50% -10%,#101a35,var(--bg));
+  text-align:center;
+  padding:20px;
+}
+h1{font-size:1.8rem;margin-bottom:10px;}
+p{max-width:700px;margin:10px auto;color:var(--muted);line-height:1.6;}
+.buttons{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+button{
+  background:var(--accent);color:#000;font-weight:600;border:none;border-radius:10px;
+  padding:12px 22px;font-size:1rem;cursor:pointer;transition:0.2s;
+}
+button:hover{opacity:.85;transform:scale(1.04);}
+footer{position:absolute;bottom:14px;font-size:13px;color:var(--muted);}
+canvas{position:fixed;inset:0;z-index:-1;}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<h1>🕳️ Black Hole Lab — WebGL Edition</h1>
+<p>
+Un esperimento interattivo che simula il <b>lensing gravitazionale</b> attorno a un buco nero.<br>
+Creato per esplorare la bellezza matematica del cosmo in tempo reale, direttamente dal browser.
+</p>
+
+<div class="buttons">
+  <button onclick="location.href='index.html'">▶ Play</button>
+  <button onclick="location.href='https://www.pezzaliapp.com'">🏠 Home</button>
+</div>
+
+<footer>© 2025 — pezzaliAPP.com · Cultura digitale tra codice e spazio</footer>
+
+<script>
+// semplice sfondo stellare animato
+const c=document.getElementById('bg'),x=c.getContext('2d');
+function resize(){c.width=innerWidth;c.height=innerHeight;}
+window.addEventListener('resize',resize);resize();
+let stars=[...Array(400)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,z:Math.random()*c.width}));
+function loop(){
+  x.fillStyle='rgba(6,11,24,0.4)';x.fillRect(0,0,c.width,c.height);
+  for(let s of stars){
+    s.z-=2;if(s.z<=0){s.z=c.width;s.x=Math.random()*c.width;s.y=Math.random()*c.height;}
+    let k=128/s.z;
+    let px=s.x*k+c.width/2,py=s.y*k+c.height/2;
+    if(px>=0&&px<=c.width&&py>=0&&py<=c.height){
+      let size=(1-k*0.5);
+      x.fillStyle='rgba(220,230,255,0.8)';
+      x.fillRect(px,py,size,size);
+    }
+  }
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>
